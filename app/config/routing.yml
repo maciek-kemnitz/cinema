@@ -1,0 +1,4 @@
+enjoy_main:
+    resource: "@EnjoyMainBundle/Resources/config/routing.yml"
+    prefix:   /
+
