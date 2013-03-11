@@ -1,0 +1,8 @@
+{% for movie in movies %}
+    <div>
+        <strong>{{  movie->getName()}}</strong>
+        {% for date in movie->getDates() %}
+            {{ date->date}}</br>
+        {% endfor %}
+    </div>
+{% endfor %}

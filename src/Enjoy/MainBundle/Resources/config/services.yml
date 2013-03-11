@@ -1,0 +1,7 @@
+parameters:
+#    enjoy_main.example.class: Enjoy\MainBundle\Example
+
+services:
+#    enjoy_main.example:
+#        class: %enjoy_main.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
