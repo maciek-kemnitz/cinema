@@ -14,3 +14,6 @@ Enjoy\MainBundle\Entity\Movie:
         name:
             type: string
             length: 100
+        img_url:
+            type: string
+            length: 255

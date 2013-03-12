@@ -1,3 +1,8 @@
 enjoy_main_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: EnjoyMainBundle:Default:index }
+
+show:
+    pattern:  /show
+    defaults: { _controller: EnjoyMainBundle:Default:show }
+

@@ -1,0 +1,13 @@
+.picture-row{
+    margin:5px;
+    display: inline-block;
+}
+.logo{
+    width: 30px;
+    height: 30px;
+}
+#pull-right {
+    float: right;
+    padding-right: 25px;
+    padding-top: 5px;
+}

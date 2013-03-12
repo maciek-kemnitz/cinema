@@ -7,6 +7,7 @@ class Movie
     protected $id;
     protected $name;
     protected $dates;
+    protected $img_url;
 
     /**
      * Constructor
@@ -80,5 +81,28 @@ class Movie
     public function getDates()
     {
         return $this->dates;
+    }
+
+    /**
+     * Set img_url
+     *
+     * @param string $imgUrl
+     * @return Movie
+     */
+    public function setImgUrl($imgUrl)
+    {
+        $this->img_url = $imgUrl;
+    
+        return $this;
+    }
+
+    /**
+     * Get img_url
+     *
+     * @return string 
+     */
+    public function getImgUrl()
+    {
+        return $this->img_url;
     }
 }

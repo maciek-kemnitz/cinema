@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function show()
+    public function showAction()
     {
         $movies = $this->getDoctrine()
                     ->getRepository('EnjoyMainBundle:Movie')
@@ -27,7 +27,7 @@ class DefaultController extends Controller
         curl_setopt($tuCurl, CURLOPT_POST, 1);
 
         curl_setopt($tuCurl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
-        curl_setopt($tuCurl, CURLOPT_POSTFIELDS, "locationId=1010306&date=11%2F03%2F2013&venueTypeId=0");
+        curl_setopt($tuCurl, CURLOPT_POSTFIELDS, "locationId=1010306&date=13%2F03%2F2013&venueTypeId=0");
 
         curl_setopt($tuCurl, CURLOPT_SSL_VERIFYPEER, 1);
         curl_setopt($tuCurl, CURLOPT_RETURNTRANSFER, 1);
@@ -43,22 +43,22 @@ class DefaultController extends Controller
 
         foreach($rows as $row)
         {
+            $movie = new \Enjoy\MainBundle\Entity\Movie();
+
             $featureCode = pq($row)->find("td.featureName a")->attr("data-feature_code");
 
             $html = $this->_movieInfo($featureCode);
 
-            $this->_handleMovieInfo($html);
+            $movie->setImgUrl($this->_handleMovieInfo($html));
 
             $date = date("d m Y");
-
-            //var_dump($response);
 
             $name = pq($row)->find("td.featureName a")->text();
             echo "<p>".$name."</p>";
 
             $times = pq($row)->find(".presentationLink")->not(".expired");
             $movieDates = array();
-            $movie = new \Enjoy\MainBundle\Entity\Movie();
+
             $movie->setName(trim($name));
 
             foreach($times as $time)
@@ -74,10 +74,9 @@ class DefaultController extends Controller
 
 
             }
-#            $em = $this->getDoctrine()->getManager();
-#            $em->persist($movie);
-#            $em->flush();
-            exit();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($movie);
+            $em->flush();
         }
 
 
@@ -115,16 +114,12 @@ class DefaultController extends Controller
 
     private function _handleMovieInfo($data)
     {
-        var_dump($data);
+        $data = "<html>" . $data . "</html>";
         $dupa = \phpQuery::newDocument($data);
-        #\phpQuery::$debug = 1;
-        echo "<hr>";
-        var_dump($dupa->empty());
-        echo "<hr>";
-        $img = $dupa->find("div");
-        var_dump($img);
-        $imgSrc = pq($img)->attr("src");
-        var_dump($imgSrc);
-        echo $imgSrc;
+
+        $img = $dupa->find(".feature_info_media img")->attr("src");
+
+        return $img;
+
     }
 }
