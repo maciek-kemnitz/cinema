@@ -3,6 +3,9 @@ enjoy_main_homepage:
     defaults: { _controller: EnjoyMainBundle:Default:index }
 
 show:
-    pattern:  /show
-    defaults: { _controller: EnjoyMainBundle:Default:show }
+    pattern:  /show/{date}
+    defaults: { _controller: EnjoyMainBundle:Default:show, date:null }
+home_page:
+    pattern:  /
+    defaults: { _controller: EnjoyMainBundle:HomePage:index }
 

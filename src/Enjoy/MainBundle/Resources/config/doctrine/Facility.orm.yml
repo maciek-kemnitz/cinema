@@ -1,0 +1,32 @@
+Enjoy\MainBundle\Entity\Facility:
+    type: entity
+    table: facility
+
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        crowlId:
+            type: string
+            length: 100
+        companyName:
+            type: string
+            length: 100
+        locationName:
+            type: string
+            length: 100
+        city:
+            type: string
+            length: 100
+            nullable: true
+        street:
+            type: string
+            length: 100
+            nullable: true
+        lat:
+            type: float
+            nullable: true
+        lon:
+            type: float
+            nullable: true

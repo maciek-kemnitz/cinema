@@ -8,6 +8,12 @@ class Movie
     protected $name;
     protected $dates;
     protected $img_url;
+    protected $description;
+    protected $originalName;
+    protected $length;
+    protected $direction;
+    protected $cast;
+
 
     /**
      * Constructor
@@ -104,5 +110,120 @@ class Movie
     public function getImgUrl()
     {
         return $this->img_url;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Movie
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set originalName
+     *
+     * @param string $originalName
+     * @return Movie
+     */
+    public function setOriginalName($originalName)
+    {
+        $this->originalName = $originalName;
+    
+        return $this;
+    }
+
+    /**
+     * Get originalName
+     *
+     * @return string 
+     */
+    public function getOriginalName()
+    {
+        return $this->originalName;
+    }
+
+    /**
+     * Set length
+     *
+     * @param string $length
+     * @return Movie
+     */
+    public function setLength($length)
+    {
+        $this->length = $length;
+    
+        return $this;
+    }
+
+    /**
+     * Get length
+     *
+     * @return string 
+     */
+    public function getLength()
+    {
+        return $this->length;
+    }
+
+    /**
+     * Set direction
+     *
+     * @param string $direction
+     * @return Movie
+     */
+    public function setDirection($direction)
+    {
+        $this->direction = $direction;
+    
+        return $this;
+    }
+
+    /**
+     * Get direction
+     *
+     * @return string 
+     */
+    public function getDirection()
+    {
+        return $this->direction;
+    }
+
+    /**
+     * Set cast
+     *
+     * @param string $cast
+     * @return Movie
+     */
+    public function setCast($cast)
+    {
+        $this->cast = $cast;
+    
+        return $this;
+    }
+
+    /**
+     * Get cast
+     *
+     * @return string 
+     */
+    public function getCast()
+    {
+        return $this->cast;
     }
 }

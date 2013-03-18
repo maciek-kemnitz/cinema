@@ -1,24 +1,25 @@
 {% extends '::base.html.twig' %}
 {% block body %}
-<div class="navbar">
-    <form class="navbar-search" id="pull-right">
-        <input type="text" class="search-query" placeholder="Search">
-    </form>
-    <div class="navbar-inner">
-        <a class="brand" href="index.html">MovieScaut</a>
-        <ul class="nav">
-            <li class="active"><a href="modal.html">Filmy</a></li>
-            <li><a href="modal.html">Cinema-City</a></li>
-            <li><a href="modal.html">Multikino</a></li>
-            <li><a href="modal.html">Femina</a></li>
-            <li><a href="modal.html">Kinoteka</a></li>
-            <li><a href="modal.html">Atlantik</a></li>
-            <li><a href="modal.html">Luna</a></li>
-            <li><a href="modal.html">Muranów</a></li>
-        </ul>
-
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav">
+                    <li class="active">
+                        <a href="/2013-03-17">Sunday, 2013-03-17</a></li>
+                    <li>
+                        <a href="/2013-03-18">Monday, 2013-03-18</a></li>
+                    <li>
+                        <a href="/2013-03-19">Tuesday, 2013-03-19</a></li>
+                    <li>
+                        <a href="/2013-03-20">Wednesday, 2013-03-20</a></li>
+                    <li>
+                        <a href="/2013-03-21">Thursday, 2013-03-21</a></li>
+                    <li>
+                        <a href="/2013-03-22">Friday, 2013-03-22</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-</div>
 
 <div class="container">
 
@@ -38,25 +39,15 @@
                     <div class="span6">
                         <dl class="dl-horizontal">
                             <dt>Oryginalny tytuł:</dt>
-                            <dd>The Guilt Trip</dd>
-                            <dt>Gatunek:</dt>
-                            <dd>Komedia</dd>
+                            <dd>{{ movie.getOriginalName() }}</dd>
                             <dt>Długość:</dt>
-                            <dd>95 minut</dd>
-                            <dt>Język:</dt>
-                            <dd>Angielski</dd>
-                            <dt>Data premiery:</dt>
-                            <dd>08/03/2013</dd>
-                            <dt>Ograniczenie wiekowe::</dt>
-                            <dd>b.danych</dd>
+                            <dd>{{ movie.getLength() }}</dd>
+                            <dt>Reżyseria:</dt>
+                            <dd>{{ movie.getDirection() }}</dd>
+                            <dt>Obsada:</dt>
+                            <dd>{{ movie.getCast() }}</dd>
                         </dl>
-                        <p><strong>Opis filmu:</strong> Andy Brewster wlasnie ma wyruszyc w przejazdzke po kraju...
-                            kiedy poczucie winy sprawia, ze decyduje sie zabrac ze soba
-                            swoja mame, Joyce. Przez 8 dni i 3000 mil, Andy bedzie wprawiany
-                            w zaklopotanie, doprowadzany do szalu, analizowany i wciagany w
-                            niepokojace sytuacje przez kobiete, która zna go lepiej niz ktokolwiek
-                            inny. Jednak w miare uplywu czasu, Andy zacznie zdawac sobie sprawe
-                            z tego, ze ma wiecej wspólnego z mama niz mógl sobie wyobrazac.</p></div>
+                        <p><strong>Opis filmu:</strong>{{ movie.getDescription() }}</p></div>
                 </div>
                 <hr>
                 {% for date in movie.getDates() %}

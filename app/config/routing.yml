@@ -1,3 +1,7 @@
+enjoy_crawler:
+    resource: "@EnjoyCrawlerBundle/Resources/config/routing.yml"
+    prefix:   /
+
 enjoy_main:
     resource: "@EnjoyMainBundle/Resources/config/routing.yml"
     prefix:   /

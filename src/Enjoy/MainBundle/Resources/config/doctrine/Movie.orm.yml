@@ -17,3 +17,22 @@ Enjoy\MainBundle\Entity\Movie:
         img_url:
             type: string
             length: 255
+        description:
+            type: text
+            nullable: true
+        originalName:
+            type: string
+            length: 100
+            nullable: true
+        length:
+            type: string
+            length: 50
+            nullable: true
+        direction:
+            type: string
+            length: 100
+            nullable: true
+        cast:
+            type: text
+            nullable: true
+

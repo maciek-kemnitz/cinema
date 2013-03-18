@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+    {% set movieDate = 'now' | date("d-m-Y") %}
+    <div class="container">
+        <form action="{{ path('show', {'date': movieDate}) }}" method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form) }}
+
+            <input type="submit" />
+        </form>
+    </div>
+{% endblock %}

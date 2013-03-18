@@ -1,13 +1,7 @@
-Enjoy\MainBundle\Entity\MovieDate:
+Enjoy\MainBundle\Entity\Crowled:
     type: entity
-    table: movie_date
+    table: crowled
     manyToOne:
-        movie:
-          targetEntity: Movie
-          inversedBy: dates
-          joinColumn:
-            name: movie_id
-            referencedColumnName: id
         facility:
           targetEntity: Facility
           joinColumn:

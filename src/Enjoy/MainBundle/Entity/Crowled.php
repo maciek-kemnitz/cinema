@@ -2,13 +2,11 @@
 
 namespace Enjoy\MainBundle\Entity;
 
-class MovieDate
+class Crowled
 {
     protected $id;
-    protected $date;
-    protected $movie;
     protected $facility;
-
+    protected $date;
 
     /**
      * Get id
@@ -20,35 +18,11 @@ class MovieDate
         return $this->id;
     }
 
-
-    /**
-     * Set movie
-     *
-     * @param \Enjoy\MainBundle\Entity\Movie $movie
-     * @return MovieDate
-     */
-    public function setMovie(\Enjoy\MainBundle\Entity\Movie $movie = null)
-    {
-        $this->movie = $movie;
-    
-        return $this;
-    }
-
-    /**
-     * Get movie
-     *
-     * @return \Enjoy\MainBundle\Entity\Movie 
-     */
-    public function getMovie()
-    {
-        return $this->movie;
-    }
-
     /**
      * Set date
      *
      * @param \DateTime $date
-     * @return MovieDate
+     * @return Crowled
      */
     public function setDate($date)
     {
@@ -71,7 +45,7 @@ class MovieDate
      * Set facility
      *
      * @param \Enjoy\MainBundle\Entity\Facility $facility
-     * @return MovieDate
+     * @return Crowled
      */
     public function setFacility(\Enjoy\MainBundle\Entity\Facility $facility = null)
     {
