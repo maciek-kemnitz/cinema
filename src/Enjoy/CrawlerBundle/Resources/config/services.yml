@@ -1,0 +1,7 @@
+parameters:
+#    enjoy_crawler.example.class: Enjoy\CrawlerBundle\Example
+
+services:
+#    enjoy_crawler.example:
+#        class: %enjoy_crawler.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
