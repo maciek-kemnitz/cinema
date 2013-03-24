@@ -1,63 +1,97 @@
 {% extends '::base.html.twig' %}
 {% block body %}
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="container">
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+        <div class="navbar">
+            <div class="navbar-inner">
                 <ul class="nav">
-                    <li class="active">
-                        <a href="/2013-03-17">Sunday, 2013-03-17</a></li>
-                    <li>
-                        <a href="/2013-03-18">Monday, 2013-03-18</a></li>
-                    <li>
-                        <a href="/2013-03-19">Tuesday, 2013-03-19</a></li>
-                    <li>
-                        <a href="/2013-03-20">Wednesday, 2013-03-20</a></li>
-                    <li>
-                        <a href="/2013-03-21">Thursday, 2013-03-21</a></li>
-                    <li>
-                        <a href="/2013-03-22">Friday, 2013-03-22</a></li>
+                    {% set currentDay = currentDay | date("d-m-Y") %}
+                    {% for day in days %}
+                        {% set movieDate = day | date("d-m-Y") %}
+
+                        <li {% if currentDay == movieDate %}class="active"{% endif %}>
+                            <a href="{{ path('show', {'date': movieDate}) }}">{{ day | date("l") }}<br>{{ day | date("Y-m-d") }}</a></li>
+                        <li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
-    </div>
-
-<div class="container">
-
-
+    <div id="movie-pills" class="text-center">
     {% for movie in movies %}
+
         <div class="picture-row">
-            <a href="#movie-modal-{{ movie.getId() }}"  data-toggle="modal"><img src="{{ movie.getImgUrl() }}" class="img-polaroid"></a>
+            <a href="#movie-modal-{{ movie.getId() }}"  data-toggle="modal"><img src="{{ movie.getImgUrl() }}" class="img-polaroid movie-pic"></a>
         </div>
-        <div class="modal hide fade" id="movie-modal-{{ movie.getId() }}">
+        <div class="modal hide fade movie-info" id="movie-modal-{{ movie.getId() }}">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h3>{{ movie.getName() }}</h3>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="span3"><img src="{{ movie.getImgUrl() }}" class="img-polaroid"></div>
+                    <div class="span3"><img src="{{ movie.getImgUrl() }}" class="img-polaroid movie-pic"></div>
                     <div class="span6">
                         <dl class="dl-horizontal">
+                            {% if movie.getOriginalName() %}
                             <dt>Oryginalny tytuł:</dt>
                             <dd>{{ movie.getOriginalName() }}</dd>
+                            {% endif %}
+
+                            {% if movie.getLength() %}
                             <dt>Długość:</dt>
                             <dd>{{ movie.getLength() }}</dd>
+                            {% endif %}
+
+                            {% if movie.getDirection() %}
                             <dt>Reżyseria:</dt>
                             <dd>{{ movie.getDirection() }}</dd>
+                            {% endif %}
+
+                            {% if movie.getCast() %}
                             <dt>Obsada:</dt>
                             <dd>{{ movie.getCast() }}</dd>
+                            {% endif %}
                         </dl>
-                        <p><strong>Opis filmu:</strong>{{ movie.getDescription() }}</p></div>
+                        <strong>Opis filmu:</strong>
+                        <p>{{ movie.getDescription() }}</p></div>
                 </div>
                 <hr>
-                {% for date in movie.getDates() %}
-                    <span class="badge badge-info">{{ date.getDate() | date("G:i") }}</span>
-                {% endfor %}
+                <div id="badge-legend">
+                    <span class="badge badge-info">2D</span>
+                    <span class="badge badge-warning">3D</span>
+                    <span class="badge badge-success">Napisy</span>
+                    <span class="badge badge-important">Dubbing</span>
+                </div>
+                <table class="table table-bordered">
+                    <tbody>
+                        {% for item in struct[movie.getId()] %}
+                            <tr>
+                                <td>{{ item['name'] }}</td>
+                                <td>
+                                    {% for subItem in item['dates'] %}
+
+                                        {% if subItem['lType'] == 1 %}
+                                            <span class="badge badge-success time-addon">
+                                        {% elseif subItem['lType'] == 2 %}
+                                            <span class="badge badge-important time-addon">
+                                        {% endif %}
+                                        <span class="badge badge-{% if subItem['dType'] == 1 %}warning{% else %}info{% endif %}">{{ subItem['date'] | date("G:i") }}</span>
+                                        {% if subItem['lType'] == 1 %}
+                                            </span>
+                                        {% elseif subItem['lType'] == 2 %}
+                                            </span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn">Close</a>
             </div>
         </div>
     {% endfor %}
+    </div>
 </div>
 {% endblock %}

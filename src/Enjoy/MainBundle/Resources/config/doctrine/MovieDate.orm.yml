@@ -20,3 +20,8 @@ Enjoy\MainBundle\Entity\MovieDate:
     fields:
         date:
             type: datetime
+        d_type:
+            type: integer
+        l_type:
+            type: integer
+

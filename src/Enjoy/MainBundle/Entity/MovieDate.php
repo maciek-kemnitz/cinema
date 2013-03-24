@@ -8,6 +8,8 @@ class MovieDate
     protected $date;
     protected $movie;
     protected $facility;
+    protected $d_type;
+    protected $l_type;
 
 
     /**
@@ -88,5 +90,51 @@ class MovieDate
     public function getFacility()
     {
         return $this->facility;
+    }
+
+    /**
+     * Set d_type
+     *
+     * @param integer $dType
+     * @return MovieDate
+     */
+    public function setDType($dType)
+    {
+        $this->d_type = $dType;
+    
+        return $this;
+    }
+
+    /**
+     * Get d_type
+     *
+     * @return integer 
+     */
+    public function getDType()
+    {
+        return $this->d_type;
+    }
+
+    /**
+     * Set l_type
+     *
+     * @param integer $lType
+     * @return MovieDate
+     */
+    public function setLType($lType)
+    {
+        $this->l_type = $lType;
+    
+        return $this;
+    }
+
+    /**
+     * Get l_type
+     *
+     * @return integer 
+     */
+    public function getLType()
+    {
+        return $this->l_type;
     }
 }

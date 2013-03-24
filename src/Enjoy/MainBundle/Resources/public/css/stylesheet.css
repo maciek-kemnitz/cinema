@@ -11,3 +11,62 @@
     padding-right: 25px;
     padding-top: 5px;
 }
+
+.main {
+    margin-top: 30px;
+}
+
+#start-facilities div, input{
+    float: left;
+}
+
+#start-facilities label{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#submit-facilities {
+    padding-top: 30px;
+    clear: left;
+    text-align: center;
+}
+
+#logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.nav {
+    text-align: center;
+}
+
+.modal-body {
+    text-align: left;
+}
+
+.time-addon {
+    padding: 2px;
+}
+
+.movie-pic {
+    width: 198px;
+    height: 284px;
+}
+
+.movie-info {
+    margin-left: -400px;
+}
+
+.movie-info .modal-body {
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+#movie-pills {
+    margin-bottom: 20px;
+}
+
+#badge-legend {
+    margin-bottom: 20px;
+    text-align: center;
+}

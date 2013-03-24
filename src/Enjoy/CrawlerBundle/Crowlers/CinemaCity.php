@@ -75,7 +75,7 @@ class CinemaCity
     public function getHtmlPage($facility, $date)
     {
         $tuCurl = curl_init();
-        curl_setopt($tuCurl, CURLOPT_URL, "http://www.cinema-city.pl/scheduleInfo");
+        curl_setopt($tuCurl, CURLOPT_URL, "http://www.cinema-city.pl/scheduleInfoRows");
 
         curl_setopt($tuCurl, CURLOPT_VERBOSE, 0);
         curl_setopt($tuCurl, CURLOPT_HEADER, 0);
@@ -90,6 +90,7 @@ class CinemaCity
 
         $tuData = curl_exec($tuCurl);
         curl_close($tuCurl);
+        //var_dump($tuData);
 
         return $tuData;
     }
@@ -103,6 +104,12 @@ class CinemaCity
         foreach($rows as $row)
         {
             $name = pq($row)->find("td.featureName a")->text();
+            $dType = 0;
+            if (strstr($name, "3D"))
+            {
+                $name = trim(preg_replace("/3D/","",$name));
+                $dType = 1;
+            }
 
             $this->movie = $this->container->get("doctrine")
                           ->getRepository('EnjoyMainBundle:Movie')
@@ -120,12 +127,22 @@ class CinemaCity
                 $this->_handleMovieInfo($html);
             }
 
+            $lange = pq($row)->find(":nth-child(3)")->text();
+            $lType = 0;
+            if ($lange)
+            {
+                switch($lange)
+                {
+                    case "NAP": $lType = 1;
+                            break;
 
+                    case "DUB": $lType = 2;
+                        break;
+                }
+            }
 
             $times = pq($row)->find(".presentationLink")->not(".expired");
             $movieDates = array();
-
-
 
             foreach($times as $time)
             {
@@ -140,6 +157,8 @@ class CinemaCity
                 $this->movie->addDate($movieDate);
                 $movieDate->setMovie($this->movie);
                 $movieDate->setFacility($facility);
+                $movieDate->setDType($dType);
+                $movieDate->setLType($lType);
             }
             $em =$this->container->get('doctrine')->getManager();
             $em->persist($this->movie);
@@ -152,8 +171,11 @@ class CinemaCity
     private function _movieInfo($featureCode)
     {
         $tuCurl = curl_init();
-        curl_setopt($tuCurl, CURLOPT_URL, "http://www.cinema-city.pl/featureInfo?featureCode=".$featureCode);
+        curl_setopt($tuCurl, CURLOPT_URL, "http://www.cinema-city.pl/featureInfo?featureCode=".$featureCode."&isLocal=false&groupByDistributorCode=true");
+
         curl_setopt($tuCurl, CURLOPT_VERBOSE, 0);
+        curl_setopt($tuCurl, CURLOPT_REFERER, "www.cinema-city.pl");
+        curl_setopt($tuCurl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.172 Safari/537.22");
         curl_setopt($tuCurl, CURLOPT_HEADER, 0);
         curl_setopt($tuCurl, CURLOPT_HTTPHEADER, array('Content-Type: text/html'));
         curl_setopt($tuCurl, CURLOPT_SSL_VERIFYPEER, 1);
@@ -167,7 +189,15 @@ class CinemaCity
 
     private function _handleMovieInfo($data)
     {
-        $data = "<html>" . $data . "</html>";
+
+        $tidy = new \tidy();
+        //$data = $tidy->repairString($data);
+        //var_dump($data);
+        /*var_dump($clean);
+        echo "<hr>";
+        $data = strstr($data, "<div");
+
+        $data = "<html><body>" . $data . "</body></html>";*/
 
         $doc = \phpQuery::newDocument($data);
 

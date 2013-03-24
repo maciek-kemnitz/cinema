@@ -1,11 +1,35 @@
 {% extends '::base.html.twig' %}
 {% block body %}
     {% set movieDate = 'now' | date("d-m-Y") %}
-    <div class="container">
-        <form action="{{ path('show', {'date': movieDate}) }}" method="post" {{ form_enctype(form) }}>
-            {{ form_widget(form) }}
 
-            <input type="submit" />
-        </form>
+    <div class="container">
+        <div class="main">
+            <div id="logo">
+                <h1>Movie Scout</h1>
+                <h4>the choice is yours</h4>
+            </div>
+            <div class="row">
+                <div class="span8 well">
+                    <form action="{{ path('show', {'date': movieDate}) }}" method="post" {{ form_enctype(form) }}>
+                        <div id="start-facilities">
+                            {% for child in form.children %}
+                                {% if loop.last %}
+                                    {{ form_rest(form) }}
+                                {% else %}
+                                    <div>
+                                        {{ form_widget(child) }}
+                                        {{ form_label(child) }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div id="submit-facilities">
+                            <button type="submit" class="btn">Pokaż filmy</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="span3 well">Wybierz kina, które najbardziej ci odpowiadają. Od twojego wyboru zależy jakie filmy się wyświetlą.</div>
+            </div>
+        </div>
     </div>
 {% endblock %}

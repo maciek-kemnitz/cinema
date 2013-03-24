@@ -24,6 +24,8 @@ class HomePageController extends Controller
 
 
 
+
+
         $form = $form->getForm();
 
         return $this->render('EnjoyMainBundle:HomePage:home_page.html.twig', array("form" => $form->createView()));
